@@ -22,11 +22,13 @@
         class="map"
     >
 
-    <mgl-popup class="mgl-popup" *ngFor="let c of coordinates"
-    [lngLat]="[c[0], c[1]]">
-    {{c[2]}}
-    </mgl-popup>
-
+    <div *ngIf="show">
+        <mgl-popup class="mgl-popup" *ngFor="let c of coordinates"
+        [lngLat]="[c[0], c[1]]">
+        {{c[2]}}
+        </mgl-popup>
+    </div>
+    
     </mgl-map>
     <div class="thing">
         <app-poll [username]="username" [bio]="bio"></app-poll>
