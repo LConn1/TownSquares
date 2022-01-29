@@ -24,6 +24,7 @@ export class ApiService {
   postQuestion(question: any): any {
     const headers = new HttpHeaders({"authorization": "Bearer " + sessionStorage.getItem("token")});
     const body = {
+      username: question.username,
       question_text: question.question,
       answer_options: question.options,
       gps_coordinates: question.coordinates,

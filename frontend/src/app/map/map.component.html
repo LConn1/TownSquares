@@ -1,7 +1,19 @@
 <!-- Queens colour scheme -->
 <!-- [style]="'mapbox://styles/dmcphaden/ckyxawrzi000r14p5z86ks4ih'" -->
-
-<div class="map-container">
+<div *ngIf="!username" class="landingpage">
+    <img src="../../assets/coollogo_com-172991312.png">
+    <br><br>
+    <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="tempUsername">
+    </mat-form-field><br>
+    <mat-form-field appearance="outline">
+        <mat-label>About You</mat-label>
+        <input matInput [(ngModel)]="bio">
+    </mat-form-field><br>
+    <button mat-raised-button color="primary" (click)="login()">Login</button>
+</div>
+<div *ngIf="username" class="map-container">
     <mgl-map
     
         [style]="'mapbox://styles/mapbox/streets-v9'"
@@ -19,10 +31,10 @@
     
     </mgl-map>
     <div class="thing">
-        <app-poll></app-poll>
+        <app-poll [username]="username" [bio]="bio"></app-poll>
     </div>
 </div>
-<app-view-poll [question]="currentPoll.question" 
+<app-view-poll *ngIf="username" [question]="currentPoll.question" 
 [option1]="currentPoll.option1" 
 [option2]="currentPoll.option2" 
 [option3]="currentPoll.option3" 

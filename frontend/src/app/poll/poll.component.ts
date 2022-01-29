@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { AnySourceData } from 'mapbox-gl';
@@ -10,7 +10,11 @@ import { AnySourceData } from 'mapbox-gl';
 })
 export class PollComponent implements OnInit {
 
+  @Input() username: any;
+  @Input() bio: any;
+
   poll: any = {
+    username: "",
     question: "",
     options: [],
     coordinates: {},
@@ -24,11 +28,17 @@ export class PollComponent implements OnInit {
   constructor(private apiService: ApiService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    console.log("hey")
+    navigator.geolocation.getCurrentPosition((coords: any) => {
+      this.poll.coordinates = coords.coords.latitude.toString() + ", " + coords.coords.longitude.toString()
+    })
   }
 
   createPoll(): void {
     this.poll.options = [this.option1, this.option2, this.option3]
+    
     const body = {
+      username: this.username,
       question: this.poll.question,
       options: this.poll.options,
       coordinates: this.poll.coordinates,
@@ -37,8 +47,10 @@ export class PollComponent implements OnInit {
     this.apiService.postQuestion(body).subscribe((data: any) => {
       this.poll.question = ""
       this.poll.options = []
-      this.poll.coordinates = {}
       this.poll.radius = 5
+      this.option1 = ""
+      this.option2 = ""
+      this.option3 = ""
       this._snackBar.open("Poll Submitted!");
     },
     (err: any) => {
@@ -54,6 +66,19 @@ export class PollComponent implements OnInit {
     this.option1 = ""
     this.option2 = ""
     this.option3 = ""
+  }
+
+
+  success(pos: any): void {
+    const crd = pos.coords
+  }
+
+  error(): void {
+
+  }
+
+  opts(): void {
+    
   }
 
 }
