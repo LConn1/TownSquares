@@ -32,7 +32,7 @@ app.post('/question', async (req, res) => {
         const username = req.body.username;                     // The question author
         const question_text = req.body.question_text;           // The question to be asked
         const question_options = req.body.answer_options;       // Array of options
-        const gps_coordinates = req.body.gps_coordinates;       // GPS coordinate of center of radius
+        const gps_coordinates = req.body.gps_coordinates;       // GPS coordinate of center of radius, comma-seperated lat,long
         const answer_radius_km = req.body.answer_radius_km;     // Answer radius in KM
 
         await db_utils.poseQuestion(username, question_text, question_options, gps_coordinates, answer_radius_km);
