@@ -38,6 +38,10 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.auth()
+    this.getQuestions()
+  }
+
+  getQuestions(): void {
     this.apiService.getQuestions().subscribe((data: any) => {
 
       this.questions = data.questions
@@ -78,7 +82,7 @@ export class MapComponent implements OnInit {
       answer_chosen: event.option
     }
     this.apiService.postAnswer(body).subscribe((data: any) => {
-
+      this.getQuestions()
     })
   }
 
