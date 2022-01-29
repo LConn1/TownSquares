@@ -5,6 +5,10 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
+import { HttpClientModule } from '@angular/common/http';
+
+import { environment } from './../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -12,8 +16,9 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     NgxMapboxGLModule.withConfig({
-      accessToken: 'pk.eyJ1IjoiZG1jcGhhZGVuIiwiYSI6ImNreXg2dHphODBkdHAydXFrdXJiZmUwOTAifQ.XEIjDpMnbLwCmeb_FGOCVQ'    
+      accessToken: environment.mapbox_token
     })
   ],
   providers: [],
