@@ -28,5 +28,6 @@ mgl-map {
 }
 
 .hover {
-    cursor: pointer
+    cursor: pointer;
+    font-weight: bold;
 }
