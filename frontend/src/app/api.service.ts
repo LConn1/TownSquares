@@ -6,7 +6,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ApiService {
 
+  apiToken: any;
+
   constructor(private http: HttpClient) { }
+
+  auth(): any {
+    this.http.get('/auth').subscribe((data: any) => {
+      sessionStorage.setItem("user_token", data.user_token);
+    })
+  }
 
   getQuestions(): any {
     const headers = new HttpHeaders({"authorization": "Bearer " + sessionStorage.getItem("token")});

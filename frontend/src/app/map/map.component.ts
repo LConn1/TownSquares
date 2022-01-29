@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-map',
@@ -8,12 +9,18 @@ import { Component, OnInit } from '@angular/core';
 export class MapComponent implements OnInit {
 
   // Queen's University
-  lat = 44.2253; 
-  lng = -76.4951;
+  lat = 44.2253
+  lng = -76.4951
+  questions: any
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
+    this.apiService.auth()
+    this.apiService.getQuestions().subscribe((data: any) => {
+      this.questions = data.questions
+      console.log(this.questions)
+    })
   }
 
 }
