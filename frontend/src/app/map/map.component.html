@@ -24,7 +24,8 @@
 
     <div *ngIf="show">
         <mgl-popup class="mgl-popup" *ngFor="let c of coordinates"
-        [lngLat]="[c[0], c[1]]">
+        [lngLat]="[c[0], c[1]]"
+        [closeOnClick]="false">
         {{c[2]}}
         </mgl-popup>
     </div>
