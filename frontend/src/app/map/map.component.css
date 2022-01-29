@@ -1,0 +1,15 @@
+mgl-map {
+    height: 100%;
+    width: 100%;
+}
+
+.map-container {
+    height: 100%;
+    width: 100%;
+}
+
+.thing {
+    background-color: blueviolet;
+    position: absolute;
+    top: 0px;
+}
