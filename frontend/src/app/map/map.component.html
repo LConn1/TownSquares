@@ -20,4 +20,8 @@
         <app-poll></app-poll>
     </div>
 </div>
-<!-- <app-view-poll></app-view-poll> -->
+<app-view-poll [question]="currentPoll.question" 
+[option1]="currentPoll.option1" 
+[option2]="currentPoll.option2" 
+[option3]="currentPoll.option3" 
+(voteEmitter)="vote($event)"></app-view-poll>
