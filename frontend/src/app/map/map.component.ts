@@ -79,13 +79,25 @@ export class MapComponent implements OnInit {
       answer_chosen: event.option
     }
     this.apiService.postAnswer(body).subscribe((data: any) => {
-      this.getQuestions()
-      this.questions.forEach((q: any) =>{
-        console.log(q)
-        if (q._id == event._id) {
-          this.openPoll(q)
-        }
-      })
+      this.apiService.getQuestions().subscribe((data: any) => {
+
+        this.questions = data.questions
+  
+        let temp: any = []
+        this.questions.forEach((q:any) => {
+          q.coords = [q.gps_coordinates.split(",")[1], q.gps_coordinates.split(",")[0]]
+          temp.push(q)
+        })
+        this.questions = temp
+        this.questions.forEach((q: any) =>{
+          console.log(q)
+          if (q._id == event._id) {
+            this.openPoll(q)
+          }
+        })
+        this.reload();
+      })    
+      
     })
   }
 
