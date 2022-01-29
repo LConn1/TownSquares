@@ -7,10 +7,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ViewPollComponent implements OnInit {
 
+  @Input() q_id: any;
   @Input() question: any;
   @Input() option1: any;
   @Input() option2: any;
   @Input() option3: any;
+  @Input() username: any;
+  @Input() myusername: any;
+  @Input() voters: any;
   @Output() voteEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
@@ -21,8 +25,8 @@ export class ViewPollComponent implements OnInit {
 
   vote(option: any): void {
     const answer = {
-      poll_id: 123,
-      option: option
+      _id: this.q_id,
+      option: option.option
     }
     this.voteEmitter.emit(answer)
   }
