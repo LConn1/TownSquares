@@ -1,0 +1,29 @@
+<mat-card class="example-card mat-elevation-z3">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Longtime Kingston Resident</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Question</mat-label>
+        <input matInput [(ngModel)]="poll.question">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Option 1</mat-label>
+        <input matInput [(ngModel)]="option1">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Option 2</mat-label>
+        <input matInput [(ngModel)]="option2">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Option 3</mat-label>
+        <input matInput [(ngModel)]="option3">
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="createPoll()">Post</button>
+      <button mat-raised-button color="warn" (click)="clearPoll()">Cancel</button>
+    </mat-card-actions>
+</mat-card>
