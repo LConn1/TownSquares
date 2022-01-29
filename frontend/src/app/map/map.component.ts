@@ -16,6 +16,7 @@ export class MapComponent implements OnInit {
   username: any
   tempUsername: any
   bio: any
+  viewQuestion: any
 
   currentPoll: any = {
     question: "",
@@ -37,47 +38,66 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.auth()
+    this.getQuestions()
+  }
+
+  getQuestions(): void {
     this.apiService.getQuestions().subscribe((data: any) => {
 
       this.questions = data.questions
 
-      // Set location of questions on the map
-      this.coordinates = [];
-      for (var i = 0; i < data.questions.length; i++)
-      {
-        this.coordinates = this.coordinates.concat(
-          [
-            [   
-              data.questions[i].gps_coordinates.split(",")[1],
-              data.questions[i].gps_coordinates.split(",")[0],
-              data.questions[i].question_text
-            ]
-          ]
-        );
-      }
-
-      console.log("Coordinates array is: ", this.coordinates);
-      console.log(this.questions)
-      this.openPoll();  // temporary
+      let temp: any = []
+      this.questions.forEach((q:any) => {
+        q.coords = [q.gps_coordinates.split(",")[1], q.gps_coordinates.split(",")[0]]
+        temp.push(q)
+      })
+      this.questions = temp
 
       this.reload();
     })    
   }
 
-  openPoll(): void {
-    // replace hard coded question with the actual question that you clicked on
-    this.currentPoll.question = this.questions[0].question_text
-    this.currentPoll.option1 = this.questions[0].answer_options[0].option
-    this.currentPoll.option2 = this.questions[0].answer_options[1].option
-    this.currentPoll.option3 = this.questions[0].answer_options[2].option
-    console.log(this.currentPoll);
-    console.log(this.coordinates);
+  openPoll(q: any): void {
+    console.log(q)
+    this.viewQuestion = {
+      question: q.question_text,
+      option1: q.answer_options[0],
+      option2: q.answer_options[1],
+      option3: q.answer_options[2],
+      username: q.username,
+      id: q._id,
+      voters: q.users_voted
+    }
   }
 
   vote(event: any): void {
     console.log(event)
-    this.apiService.postAnswer(event).subscribe((data: any) => {
+    console.log(this.username)
+    const body = {
+      username: this.username,
+      question_id: event._id,
+      answer_chosen: event.option
+    }
+    this.apiService.postAnswer(body).subscribe((data: any) => {
+      this.apiService.getQuestions().subscribe((data: any) => {
 
+        this.questions = data.questions
+  
+        let temp: any = []
+        this.questions.forEach((q:any) => {
+          q.coords = [q.gps_coordinates.split(",")[1], q.gps_coordinates.split(",")[0]]
+          temp.push(q)
+        })
+        this.questions = temp
+        this.questions.forEach((q: any) =>{
+          console.log(q)
+          if (q._id == event._id) {
+            this.openPoll(q)
+          }
+        })
+        this.reload();
+      })    
+      
     })
   }
 

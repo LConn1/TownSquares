@@ -16,17 +16,16 @@
 <div *ngIf="username" class="map-container">
     <mgl-map
     
-        [style]="'mapbox://styles/mapbox/streets-v9'"
+        [style]="'mapbox://styles/jkarbi/ckz0boq49005t14onjb5o846i'"
         [zoom]="[13]"
         [center]="[lng, lat]"
         class="map"
     >
 
     <div *ngIf="show">
-        <mgl-popup class="mgl-popup" *ngFor="let c of coordinates"
-        [lngLat]="[c[0], c[1]]"
-        [closeOnClick]="false">
-        {{c[2]}}
+        <mgl-popup class="mgl-popup" *ngFor="let q of questions"
+        [lngLat]="[q.coords[0], q.coords[1]]" [closeOnClick]="false">
+            <span (click)="openPoll(q)" class="hover">{{q.question_text}}</span>
         </mgl-popup>
     </div>
     
@@ -35,8 +34,12 @@
         <app-poll [username]="username" [bio]="bio"></app-poll>
     </div>
 </div>
-<app-view-poll *ngIf="username" [question]="currentPoll.question" 
-[option1]="currentPoll.option1" 
-[option2]="currentPoll.option2" 
-[option3]="currentPoll.option3" 
+<app-view-poll class="thing2" *ngIf="viewQuestion" [question]="viewQuestion.question" 
+[option1]="viewQuestion.option1" 
+[option2]="viewQuestion.option2" 
+[option3]="viewQuestion.option3" 
+[username]="viewQuestion.username"
+[myusername]="username"
+[voters]="viewQuestion.voters"
+[q_id]="viewQuestion.id"
 (voteEmitter)="vote($event)"></app-view-poll>

@@ -28,7 +28,6 @@ export class PollComponent implements OnInit {
   constructor(private apiService: ApiService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    console.log("hey")
     navigator.geolocation.getCurrentPosition((coords: any) => {
       this.poll.coordinates = coords.coords.latitude.toString() + "," + coords.coords.longitude.toString()
     })

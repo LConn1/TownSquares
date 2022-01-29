@@ -35,9 +35,7 @@ export class ApiService {
 
   postAnswer(answer: any): any {
     const headers = new HttpHeaders({"authorization": "Bearer " + sessionStorage.getItem("token")});
-    const body = {
-      answer: answer
-    }
+    const body = answer
     return this.http.post('/answer', body, {headers: headers});
   }
 

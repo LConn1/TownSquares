@@ -9,10 +9,14 @@ import { ApiService } from '../api.service';
 })
 export class ViewPollComponent implements OnInit {
 
+  @Input() q_id: any;
   @Input() question: any;
   @Input() option1: any;
   @Input() option2: any;
   @Input() option3: any;
+  @Input() username: any;
+  @Input() myusername: any;
+  @Input() voters: any;
   @Output() voteEmitter: EventEmitter<any> = new EventEmitter();
 
   currLat: any;
