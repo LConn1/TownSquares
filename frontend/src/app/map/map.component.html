@@ -9,6 +9,12 @@
         [center]="[lng, lat]"
         class="map"
     >
+
+    <mgl-popup class="mgl-popup" *ngFor="let c of coordinates"
+    [lngLat]="[c[0], c[1]]">
+    {{c[2]}}
+    </mgl-popup>
+
     </mgl-map>
     <div class="thing">
         <app-poll></app-poll>

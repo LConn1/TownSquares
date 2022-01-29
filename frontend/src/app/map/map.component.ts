@@ -19,6 +19,10 @@ export class MapComponent implements OnInit {
     option2: "",
     option3: ""
   }
+  coordinates: Array<[number, number, string]> = [[-76.4951, 44.2253, "Pro-Vax"],
+                                                  [-76.4951, 44.25, "Anti-Vax"],
+                                                  [-76.4951, 44.3, "Anti-Vax"],
+                                                  [-76.4951, 44.4, "Pro-Vax"]];
 
   constructor(private apiService: ApiService) { }
 
