@@ -12,6 +12,9 @@ export class MapComponent implements OnInit {
   lat = 44.2253
   lng = -76.4951
   questions: any
+  username: any
+  tempUsername: any
+  bio: any
 
   currentPoll: any = {
     question: "",
@@ -50,4 +53,9 @@ export class MapComponent implements OnInit {
 
     })
   }
+
+  login(): void {
+    this.username = this.tempUsername
+  }
+
 }
