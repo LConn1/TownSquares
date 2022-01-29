@@ -68,9 +68,8 @@ async function voteOnQuestion(question_id, option) {
 
 
     const updateDoc = { $set: {"answer_options": new_answer_options}, };
-    console.log(updateDoc);
-    console.log(new_answer_options);
-    return await client.db("votingApp").collection("polls").updateOne({"_id": question_id}, updateDoc);
+
+    return await client.db("votingApp").collection("polls").updateOne({"_id": new ObjectId(question_id)}, updateDoc);
 }
 
 
