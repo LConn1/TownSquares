@@ -10,14 +10,20 @@
         class="map"
     >
 
-    <mgl-popup class="mgl-popup" *ngFor="let c of answers"
-    [lngLat]="[c[0], c[1]]">
-    {{c[2]}}
-    </mgl-popup>
-
+    <div *ngIf="show">
+        <mgl-popup class="mgl-popup" *ngFor="let c of coordinates"
+        [lngLat]="[c[0], c[1]]">
+        {{c[2]}}
+        </mgl-popup>
+    </div>
+    
     </mgl-map>
     <div class="thing">
         <app-poll></app-poll>
     </div>
 </div>
-<!-- <app-view-poll></app-view-poll> -->
+<app-view-poll [question]="currentPoll.question" 
+[option1]="currentPoll.option1" 
+[option2]="currentPoll.option2" 
+[option3]="currentPoll.option3" 
+(voteEmitter)="vote($event)"></app-view-poll>

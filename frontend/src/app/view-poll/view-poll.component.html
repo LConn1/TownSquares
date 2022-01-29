@@ -5,9 +5,9 @@
       <mat-card-subtitle>Queen's University Engineering Student</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <h3>Question</h3>
-        <button mat-raised-button color="primary" (click)="vote1()">Option 1</button>
-        <button mat-raised-button color="primary" (click)="vote2()">Option 2</button>
-        <button mat-raised-button color="primary" (click)="vote3()">Option 3</button>
+        <h3>{{question}}</h3>
+        <button mat-stroked-button color="primary" (click)="vote(option1)">{{option1}}</button><br>
+        <button mat-stroked-button color="primary" (click)="vote(option2)">{{option2}}</button><br>
+        <button mat-stroked-button color="primary" (click)="vote(option3)">{{option3}}</button>
     </mat-card-content>
 </mat-card>
