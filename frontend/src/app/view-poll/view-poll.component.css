@@ -16,3 +16,13 @@
 .mat-card-actions {
     padding: 0px 8px
 } 
+
+button {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+h3 {
+    font-weight: bold
+}
