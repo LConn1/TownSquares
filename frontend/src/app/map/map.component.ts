@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -24,6 +25,7 @@ export class MapComponent implements OnInit {
     option3: ""
   }
   coordinates: Array<[number, number, string]> = [];
+
 
   constructor(private apiService: ApiService) { }
 
