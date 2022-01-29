@@ -53,9 +53,6 @@ export class MapComponent implements OnInit {
       })
       this.questions = temp
 
-      // console.log("Coordinates array is: ", this.coordinates);
-      // console.log(this.questions)
-
       this.reload();
     })    
   }
@@ -83,6 +80,12 @@ export class MapComponent implements OnInit {
     }
     this.apiService.postAnswer(body).subscribe((data: any) => {
       this.getQuestions()
+      this.questions.forEach((q: any) =>{
+        console.log(q)
+        if (q._id == event._id) {
+          this.openPoll(q)
+        }
+      })
     })
   }
 
