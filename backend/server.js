@@ -30,7 +30,7 @@ app.post('/question', async (req, res) => {
         console.log(req.body);
 
         const question_text = req.body.question_text;           // The question to be asked
-        const question_options = req.body.answer_options;       // semi-colon delimited options
+        const question_options = req.body.answer_options;       // Array of options
         const gps_coordinates = req.body.gps_coordinates;       // GPS coordinate of center of radius
         const answer_radius_km = req.body.answer_radius_km;     // Answer radius in KM
 
