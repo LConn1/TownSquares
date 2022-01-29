@@ -29,15 +29,17 @@ app.post('/question', async (req, res) => {
 
         console.log(req.body);
 
+        const username = req.body.username;                     // The question author
         const question_text = req.body.question_text;           // The question to be asked
         const question_options = req.body.answer_options;       // Array of options
         const gps_coordinates = req.body.gps_coordinates;       // GPS coordinate of center of radius
         const answer_radius_km = req.body.answer_radius_km;     // Answer radius in KM
 
-        await db_utils.poseQuestion(question_text, question_options, gps_coordinates, answer_radius_km);
+        await db_utils.poseQuestion(username, question_text, question_options, gps_coordinates, answer_radius_km);
 
         res.send({
             success: true, 
+            username: username,
             question: question_text, 
             options: question_options, 
             gps_coordinates: gps_coordinates, 
@@ -51,10 +53,12 @@ app.post('/question', async (req, res) => {
 app.post('/answer', async (req, res) => {
     if (verify_auth_token(req, res)) {
 
+        const username = req.body.username;
         const question_id = req.body.question_id;
         const answer_chosen = req.body.answer_chosen;
         
-        await db_utils.voteOnQuestion(question_id, answer_chosen);
+
+        await db_utils.voteOnQuestion(username, question_id, answer_chosen);
 
         res.send({success: true});
     }

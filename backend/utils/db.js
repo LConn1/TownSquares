@@ -27,7 +27,7 @@ async function retrieveQuestions() {
     
 }
 
-async function poseQuestion(question_text, options, gps_coordinates, radius) {
+async function poseQuestion(username, question_text, options, gps_coordinates, radius) {
     await client.connect();
     console.log("Posing question.");
 
@@ -40,10 +40,12 @@ async function poseQuestion(question_text, options, gps_coordinates, radius) {
     }
 
     const new_doc = {
+        "username": username,
         "question_text": question_text, 
         "answer_options": answer_options,
         "gps_coordinates": gps_coordinates,
-        "answer_radius_km": radius
+        "answer_radius_km": radius,
+        "users_voted": []
     };
 
     console.log("Sendding new doc to mongodb", new_doc);
@@ -52,11 +54,16 @@ async function poseQuestion(question_text, options, gps_coordinates, radius) {
     return;
 }
 
-async function voteOnQuestion(question_id, option) {
+async function voteOnQuestion(username, question_id, option) {
     await client.connect();
     
     var this_poll = await client.db("votingApp").collection("polls").findOne( {"_id": new ObjectId(question_id)} );
-    console.log(this_poll)
+    console.log(this_poll);
+
+    if (this_poll.users_voted.indexOf(username) != -1) {
+        return;
+    }
+
     var new_answer_options = this_poll.answer_options;
     for (var i = 0; i < new_answer_options.length; i++) {
         if (new_answer_options[i].option == option) {
