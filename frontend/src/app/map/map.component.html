@@ -17,7 +17,7 @@
     <mgl-map
     
         [style]="'mapbox://styles/jkarbi/ckz0boq49005t14onjb5o846i'"
-        [zoom]="[13]"
+        [zoom]="[12]"
         [center]="[lng, lat]"
         class="map"
     >
@@ -31,7 +31,7 @@
     
     </mgl-map>
     <div class="thing">
-        <app-poll [username]="username" [bio]="bio"></app-poll>
+        <app-poll [username]="username" [bio]="bio" (refresh)="refresh($event)"></app-poll>
     </div>
 </div>
 <app-view-poll class="thing2" *ngIf="viewQuestion" [question]="viewQuestion.question" 

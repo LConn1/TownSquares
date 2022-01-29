@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiService } from '../api.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { AnySourceData } from 'mapbox-gl';
@@ -12,6 +12,7 @@ export class PollComponent implements OnInit {
 
   @Input() username: any;
   @Input() bio: any;
+  @Output() refresh: EventEmitter<any> = new EventEmitter();
 
   poll: any = {
     username: "",
@@ -51,6 +52,7 @@ export class PollComponent implements OnInit {
       this.option2 = ""
       this.option3 = ""
       this._snackBar.open("Poll Submitted!");
+      this.refresh.emit("yo");
     },
     (err: any) => {
       alert(err)

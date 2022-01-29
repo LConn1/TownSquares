@@ -10,8 +10,8 @@ import { ApiService } from '../api.service';
 export class MapComponent implements OnInit {
 
   // Queen's University
-  lat = 44.2253
-  lng = -76.4951
+  lat = 42.994955
+  lng = -81.264405
   questions: any
   username: any
   tempUsername: any
@@ -103,6 +103,21 @@ export class MapComponent implements OnInit {
 
   login(): void {
     this.username = this.tempUsername
+  }
+
+  refresh(event: any): void {
+    this.apiService.getQuestions().subscribe((data: any) => {
+
+      this.questions = data.questions
+
+      let temp: any = []
+      this.questions.forEach((q:any) => {
+        q.coords = [q.gps_coordinates.split(",")[1], q.gps_coordinates.split(",")[0]]
+        temp.push(q)
+      })
+      this.questions = temp
+      this.reload();
+    })    
   }
 
 }
