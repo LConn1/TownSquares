@@ -1,0 +1,8 @@
+{
+    "/": {
+        "target": "https://www.townsquares.tech/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}
