@@ -37,8 +37,8 @@ export class ViewPollComponent implements OnInit {
         this.currLat = coords.coords.latitude;
         this.currLon = coords.coords.longitude;
         const answer = {
-          poll_id: 123,
-          option: option
+          _id: this.q_id,
+      option: option.option
         }
     
         this.apiService.auth()
