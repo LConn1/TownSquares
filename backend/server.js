@@ -51,7 +51,12 @@ app.get('/auth', function (req, res) {
     session_tokens = session_tokens.concat(token);
     res.send({user_token: token});
 })
+
 // Serve the built frontend out of the static folder.
 app.use('/', express.static('static'));
 
-app.listen(3000)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+    console.log('Press Ctrl+C to quit.');
+});
