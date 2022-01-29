@@ -10,7 +10,7 @@
         class="map"
     >
 
-    <mgl-popup class="mgl-popup" *ngFor="let c of coordinates"
+    <mgl-popup class="mgl-popup" *ngFor="let c of answers"
     [lngLat]="[c[0], c[1]]">
     {{c[2]}}
     </mgl-popup>
