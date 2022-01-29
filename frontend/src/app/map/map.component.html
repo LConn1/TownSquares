@@ -1,5 +1,6 @@
 <!-- Queens colour scheme -->
 <!-- [style]="'mapbox://styles/dmcphaden/ckyxawrzi000r14p5z86ks4ih'" -->
+
 <div class="map-container">
     <mgl-map
     
@@ -8,8 +9,15 @@
         [center]="[lng, lat]"
         class="map"
     >
+
+    <mgl-popup class="mgl-popup" *ngFor="let c of coordinates"
+    [lngLat]="[c[0], c[1]]">
+    {{c[2]}}
+    </mgl-popup>
+
     </mgl-map>
     <div class="thing">
-        test overlap component
+        <app-poll></app-poll>
     </div>
 </div>
+<!-- <app-view-poll></app-view-poll> -->

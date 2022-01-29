@@ -9,7 +9,7 @@ mgl-map {
 }
 
 .thing {
-    background-color: blueviolet;
     position: absolute;
-    top: 0px;
+    top: 24px;
+    left: 24px
 }
