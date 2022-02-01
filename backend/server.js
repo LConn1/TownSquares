@@ -35,6 +35,11 @@ app.post('/question', async (req, res) => {
         const gps_coordinates = req.body.gps_coordinates;       // GPS coordinate of center of radius, comma-seperated lat,long
         const answer_radius_km = req.body.answer_radius_km;     // Answer radius in KM
 
+        if ( ! (typeof gps_coordinates === 'string' && gps_coordinates.indexOf(",") != -1) ) {
+            res.send({success: false, reason: "GPS coordinates invalid."});
+            return;
+        }
+        
         await db_utils.poseQuestion(username, question_text, question_options, gps_coordinates, answer_radius_km);
 
         res.send({
