@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 
 var session_tokens = [];
-const production = false;
+const production = true;
 
 function verify_auth_token(req, res) {
     const token = req.header('Authorization').split("Bearer ")[0];
